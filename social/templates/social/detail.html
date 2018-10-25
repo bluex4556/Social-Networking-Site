@@ -1,0 +1,8 @@
+{% extends "basegeneric.html" %}
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <p>by {{ post.user.username}}</p>
+    <p>{{post.body}}</p>
+    <p>{{post.pub_date}}</p>
+    <p><a href="/social/posts/">Go back</a></p>
+{% endblock %}

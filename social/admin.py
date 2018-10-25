@@ -1,0 +1,47 @@
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
+from .models import profile,userintrests,posts,blog,blogpost,blogtags
+# Register your models here.
+
+class userintrestsInline(admin.StackedInline):
+    model=userintrests
+@admin.register(profile)
+
+class profileAdmin(admin.ModelAdmin):
+    inlines= [
+        userintrestsInline,
+    ]
+class profileInline(admin.StackedInline):
+    model=profile
+    can_delete= False
+    fk_name= 'user'
+
+class CustomUserAdmin(UserAdmin):
+    inlines=(profileInline, )
+
+    def get_inline_instances(self, request, obj=None):
+        if not obj:
+            return list()
+        return super(CustomUserAdmin, self).get_inline_instances(request,obj)
+
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
+
+@admin.register(userintrests)
+class userintrestsAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(posts)
+
+class blogtagsInline(admin.StackedInline):
+    model= blogtags
+@admin.register(blog)
+
+class blogAdmin(admin.ModelAdmin):
+    inlines=[
+        blogtagsInline,
+    ]
+
+admin.site.register(blogtags)
+admin.site.register(blogpost)

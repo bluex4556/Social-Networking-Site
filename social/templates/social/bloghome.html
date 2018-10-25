@@ -1,0 +1,15 @@
+{% extends "basegeneric.html" %}
+{% block content %}
+  <p><h1>{{blogs.blogname}}</h1></p>
+  <p><h4>About</h4>
+  <p>{{blogs.about}}</p>
+  {% if latest_posts_list %}
+    <ul>
+    {% for blogpost in latest_posts_list %}
+        <li><a href="/social/blog/posts/{{ blogpost.id }}/">{{ blogpost.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+{% endblock %}
