@@ -1,5 +1,3 @@
 # dbms
-To do 
-  add static folder
+To do
   add tags and intrests to blogs and user profile
-  
