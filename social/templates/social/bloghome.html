@@ -3,6 +3,18 @@
   <p><h1>{{blogs.blogname}}</h1></p>
   <p><h4>About</h4>
   <p>{{blogs.about}}</p>
+  <p> tags <p>
+
+  {% if taglist %}
+    <ul>
+    {% for tag in taglist %}
+        <li>{{tag.tags}}</li>
+    {% endfor %}
+    </ul>
+  {%else%}
+    <p>no intrests</p>
+  {%endif%}
+  <p>Posts</p>
   {% if latest_posts_list %}
     <ul>
     {% for blogpost in latest_posts_list %}
