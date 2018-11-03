@@ -34,7 +34,7 @@ class userintrests(models.Model):
 class posts(models.Model):
     user= models.ForeignKey(User,related_name='post_user',on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    body = models.CharField(max_length=250, null=True)
+    body = models.TextField( null=True)
     pub_date = models.DateTimeField('Date published',default=timezone.now)
     rating = models.IntegerField('rating', default=0)
     def __str__(self):
@@ -46,8 +46,7 @@ class posts(models.Model):
 class blog(models.Model):
     user= models.ForeignKey(User,related_name='blog_user',on_delete=models.CASCADE)
     blogname= models.CharField(max_length=50)
-    about= models.CharField(max_length=250,null=True)
-    #tags = models.ForeignKey(blogtags ,related_name='tags',on_delete=models.CASCADE,null=True)  
+    about= models.TextField(null=True)
     def __str__(self):
         return self.blogname
 
@@ -60,7 +59,7 @@ class blogtags(models.Model):
 class blogpost(models.Model):
     blog= models.ForeignKey(blog,related_name='blog_post',on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    body = models.CharField(max_length=250, null=True)
+    body = models.TextField(null=True)
     pub_date = models.DateTimeField('Date published',default=timezone.now)
     def __str__(self):
         return self.title
