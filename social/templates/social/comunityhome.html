@@ -1,0 +1,27 @@
+{% extends "basegeneric.html" %}
+{% block content %}
+  <p><h1>{{comunity.comunityname}}</h1></p>
+  <p><h4>About</h4>
+  <p>{{comunity.about}}</p>
+  <p> tags <p>
+
+  {% if intrestlist %}
+    <ul>
+    {% for intrest in intrestlist %}
+        <li>{{intrest.intrest}}</li>
+    {% endfor %}
+    </ul>
+  {%else%}
+    <p>no intrests</p>
+  {%endif%}
+  <!-- <p>Posts</p>
+  {% if latest_posts_list %}
+    <ul>
+    {% for blogpost in latest_posts_list %}
+        <li><a href="/social/blog/posts/{{ blogpost.id }}/">{{ blogpost.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %} -->
+{% endblock %}

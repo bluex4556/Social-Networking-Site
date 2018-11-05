@@ -81,3 +81,18 @@ class blogpost(models.Model):
     pub_date = models.DateTimeField('Date published',default=timezone.now)
     def __str__(self):
         return self.title
+
+class comunity(models.Model):
+    users = models.ManyToManyField(User)
+    comunityname= models.CharField(max_length=50)
+    about= models.TextField(null=True)
+
+    def __str__(self):
+        return self.comunityname
+
+class comunityintrest(models.Model):
+    comunity= models.ForeignKey(comunity,related_name='comunity',on_delete=models.CASCADE)
+    intrest= models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.comunity.comunityname+ ' ' + self.intrest

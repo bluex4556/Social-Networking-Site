@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from .models import profile,posts,blog,blogpost,userintrests,blogtags,Friend
+from .models import profile,posts,blog,blogpost,userintrests,blogtags,Friend,comunityintrest,comunity
 from django.http import Http404
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -61,3 +61,10 @@ def change_friends(request, operation, pk):
     elif operation == 'remove':
         Friend.lose_friend(request.user, friend)
     return redirect('index')
+
+def comunityhome(request, comunity_id):
+    comunity_= comunity.objects.get(pk=comunity_id)
+    intrestlist= comunityintrest.objects.filter( comunity = comunity_ ).values('intrest')
+    context= {'comunity': comunity_,
+              'intrestlist':intrestlist,}
+    return render(request, 'social/comunityhome.html', context)

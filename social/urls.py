@@ -10,4 +10,6 @@ urlpatterns= [
     path('posts/<int:posts_id>/', views.detail, name='detail'),
     path('blog/<int:blog_id>/',views.bloghome,name='bloghome'),
     path('blog/posts/<int:blogpost_id>/', views.blogposts, name='blogpost_detail'),
+    path('comunity/<int:comunity_id>',views.comunityhome, name = 'comunityhome'),
+
 ]
