@@ -18,5 +18,15 @@
   {%else%}
     <p>no intrests</p>
   {%endif%}
+  <p> Friends <p>
+  {% if friendslist %}
+    <ul>
+    {% for friend in friendslist %}
+        <li>{{friend.username}}</li>
+    {% endfor %}
+    </ul>
+  {%else%}
+    <p>no Friends</p>
+  {%endif%}
 
 {% endblock %}
