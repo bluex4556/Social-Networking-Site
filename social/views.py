@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from .models import profile,posts,blog,blogpost,userintrests,blogtags,Friend,comunityintrest,comunity
+from .models import profile,posts,blog,blogpost,userintrests,blogtags,Friend,comunityintrest,comunity,comments
 from django.http import Http404
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -40,7 +40,12 @@ def posthome(request):
 
 def detail(request, posts_id):
     post = get_object_or_404(posts, pk=posts_id)
-    return render(request, 'social/detail.html', {'post': post})
+    commentlist = comments.objects.filter(posts = post)
+    context = {
+            'post': post,
+            'commentlist': commentlist,
+            }
+    return render(request, 'social/detail.html',context)
 
 def bloghome(request, blog_id):
     blogs= blog.objects.get(pk=blog_id)
@@ -50,6 +55,7 @@ def bloghome(request, blog_id):
               'blogs': blogs,
               'taglist':taglist,}
     return render(request, 'social/bloghome.html', context)
+
 def blogposts(request,blogpost_id):
     posts= blogpost.objects.get(pk=blogpost_id)
     return render(request, 'social/blogdetail.html', {'posts': posts})

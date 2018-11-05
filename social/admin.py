@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from .models import profile,userintrests,posts,blog,blogpost,blogtags,comunity,comunityintrest
+from .models import profile,userintrests,posts,blog,blogpost,blogtags,comunity,comunityintrest,comments
 # Register your models here.
 
 class userintrestsInline(admin.StackedInline): #inline class for userintrests
@@ -58,3 +58,4 @@ class comunityAdmin(admin.ModelAdmin):
         ]
 
 admin.site.register(comunity,comunityAdmin)
+admin.site.register(comments)

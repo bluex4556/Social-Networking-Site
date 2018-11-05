@@ -58,9 +58,11 @@ class posts(models.Model):
     def __str__(self):
         return self.title
 
+class comments(models.Model):
+    posts= models.ForeignKey(posts,related_name= 'comments_post', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name= 'comments_user', on_delete= models.CASCADE)
+    content = models.TextField()
 
-    def __str__(self):
-        return self.title
 class blog(models.Model):
     user= models.ForeignKey(User,related_name='blog_user',on_delete=models.CASCADE)
     blogname= models.CharField(max_length=50)

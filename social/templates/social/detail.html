@@ -5,4 +5,14 @@
     <p>{{post.body}}</p>
     <p>{{post.pub_date}}</p>
     <p><a href="/social/posts/">Go back</a></p>
+    <p> comments </p>
+    {% if commentlist %}
+      <ul>
+      {% for comment in commentlist %}
+          <li>{{comment.content}} by {{comment.user.username}}</li>
+      {% endfor %}
+      </ul>
+    {%else%}
+      <p>no comments</p>
+    {%endif%}
 {% endblock %}
