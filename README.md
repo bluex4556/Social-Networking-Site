@@ -4,4 +4,6 @@
 ### To do
 
 
-add tags and intrests to blogs and user profile
+create blog, community
+edit profile
+styles

@@ -4,34 +4,31 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from .models import profile,posts,blog,blogpost,userintrests,blogtags,Friend,comunityintrest,comunity,comments
 from django.http import Http404
-from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from . import forms
 
 # Create your views here.
 
 def index(request):
     return HttpResponse("Hello")
 
-
+@login_required(login_url = '/accounts/login/')
 def UserProfileView(request):
     username = None
-    if request.user.is_authenticated:
-        temp = request.user
-        profiles= profile.objects.get(user= temp)
-        intrestlist = userintrests.objects.filter(Profile = profiles).values('intrest')
-
-        try:
-            friends = Friend.objects.get(current_user= temp)
-            friendslist = friends.users.all()
-        except Friend.DoesNotExist:
-            friendslist = False
-
-        context = {'profile': profiles,
+    temp = request.user
+    profiles= profile.objects.get(user= temp)
+    intrestlist = userintrests.objects.filter(Profile = profiles).values('intrest')
+    try:
+        friends = Friend.objects.get(current_user= temp)
+        friendslist = friends.users.all()
+    except Friend.DoesNotExist:
+        friendslist = False
+    context = {
+            'profile': profiles,
             'intrestlist': intrestlist,
-            'friendslist':friendslist,}
-        return render(request, 'social/profile.html', context)
-    else:
-        return HttpResponse("fail")
+            'friendslist':friendslist,
+                }
+    return render(request, 'social/profile.html', context)
 
 def posthome(request):
     latest_posts_list = posts.objects.order_by('-pub_date')[:5]
@@ -74,3 +71,17 @@ def comunityhome(request, comunity_id):
     context= {'comunity': comunity_,
               'intrestlist':intrestlist,}
     return render(request, 'social/comunityhome.html', context)
+
+@login_required(login_url = '/accounts/login/')
+def post_create(request):
+    if request.method == 'POST':
+        form = forms.CreatePost(request.POST)
+        if form.is_valid():
+            instance = form.save(commit = False)
+            instance.user = request.user
+            instance.save()
+            #save article to db
+            return redirect('social:posthome')
+    else:
+        form = forms.CreatePost()
+    return render(request, 'social/post_create.html', {'form':form})

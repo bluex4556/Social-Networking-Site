@@ -4,7 +4,9 @@
   <p>username : {{profile.user.username}}</p>
   <p>date of birth : {{profile.dob}}</p>
   <p> avatar: </p>
+  {% if profile.avatar %}
   <img src="{{profile.avatar.url}}" alt="Profile picture" width="270" height="250"">
+  {% endif %}
   <p>address : {{profile.address}}</p>
   <p>work : {{profile.work}}</p>
   <p>education : {{profile.education}}</p>
