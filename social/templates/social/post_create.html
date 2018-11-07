@@ -1,0 +1,12 @@
+{% extends 'basegeneric.html' %}
+
+{% block content %}
+  <div class="create-post">
+    <h2>Create Post</h2>
+    <form class="site-form" action="{% url 'social:createpost'%}" method="post">
+      {% csrf_token %}
+      {{form}}
+      <input type="submit" value="create">
+    </form>
+  </div>
+{% endblock %}

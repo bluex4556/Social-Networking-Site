@@ -53,7 +53,7 @@ class posts(models.Model):
     user= models.ForeignKey(User,related_name='post_user',on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     body = models.TextField( null=True)
-    pub_date = models.DateTimeField('Date published',default=timezone.now)
+    pub_date = models.DateTimeField('Date published', auto_now_add = True)
     rating = models.IntegerField('rating', default=0)
     def __str__(self):
         return self.title
@@ -80,7 +80,7 @@ class blogpost(models.Model):
     blog= models.ForeignKey(blog,related_name='blog_post',on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     body = models.TextField(null=True)
-    pub_date = models.DateTimeField('Date published',default=timezone.now)
+    pub_date = models.DateTimeField('Date published',auto_now_add = True)
     def __str__(self):
         return self.title
 

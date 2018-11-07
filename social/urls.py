@@ -1,9 +1,11 @@
 from django.urls import path
 from . import views
 
+app_name = 'social'
 
 urlpatterns= [
     path('',views.index,name='index'),
+    path('create/post', views.post_create, name= 'createpost'),
     path(r'profile/', views.UserProfileView,name='profileview'),
     path(r'connect/<str:operation>/<int:pk>/', views.change_friends, name='change_friends'), #operation= add or remove
     path('posts/', views.posthome,name= 'posthome'),
