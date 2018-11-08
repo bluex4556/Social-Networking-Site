@@ -18,17 +18,98 @@ a, a:visited, a:hover{
     text-decoration: none;
 }
 
-nav {
+nav
+{
   justify-self: start;
 }
 
-nav li {
-  display: inline-block;
-  margin-right: 20px;
+nav ul
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #292d3d;
 }
 
-nav button{
+nav li
+{
+    float: left;
+    font-size:18px
+}
+
+nav button
+{
   background: none;
   color: white;
   border: 0px
+}
+
+#right-button
+{
+  float:right;
+  padding: 13px 5px;
+}
+
+.wrapper button
+{
+    display:block;
+    cursor: pointer;
+}
+
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 18px;
+    text-decoration: none;
+}
+
+nav li a:hover:not(.active)
+{
+    background-color: #111;
+}
+
+.title
+{
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+.post h3{
+  margin-bottom: 20px;
+}
+
+
+.posts
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap:30px
+
+}
+
+.post
+{
+  margin-left: 15px;
+  padding: 10px;
+  border: 2px solid #00dba0;
+  position: relative;
+  padding-bottom : 20px;
+
+}
+
+.post-detail
+{
+  padding:20px
+}
+.post-detail h2
+{
+  text-align : left;
+  margin-bottom:20px
+}
+.comments
+{
+  padding:20px;
 }

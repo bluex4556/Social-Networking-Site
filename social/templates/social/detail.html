@@ -1,18 +1,26 @@
 {% extends "basegeneric.html" %}
 {% block content %}
-    <h1>{{ post.title }}</h1>
+  <div class="post-detail">
+
+    <h2>{{ post.title }}</h2>
     <p>by {{ post.user.username}}</p>
     <p>{{post.body}}</p>
-    <p>{{post.pub_date}}</p>
-    <p><a href="/social/posts/">Go back</a></p>
-    <p> comments </p>
-    {% if commentlist %}
-      <ul>
-      {% for comment in commentlist %}
-          <li>{{comment.content}} by {{comment.user.username}}</li>
-      {% endfor %}
-      </ul>
-    {%else%}
-      <p>no comments</p>
-    {%endif%}
+    <p class="date">{{post.pub_date}}</p>
+  </div>
+
+
+    <div class="comments">
+      <h3> comments </h3>
+      <br>
+      {% if commentlist %}
+        <ul>
+        {% for comment in commentlist %}
+            <li>{{comment.content}} by {{comment.user.username}}</li>
+        {% endfor %}
+        </ul>
+      {%else%}
+        <p>no comments</p>
+      {%endif%}
+  </div>
+
 {% endblock %}

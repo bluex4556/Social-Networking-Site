@@ -57,6 +57,8 @@ class posts(models.Model):
     rating = models.IntegerField('rating', default=0)
     def __str__(self):
         return self.title
+    def snippet(self):
+        return self.body[0:50]
 
 class comments(models.Model):
     posts= models.ForeignKey(posts,related_name= 'comments_post', on_delete=models.CASCADE)
@@ -83,6 +85,8 @@ class blogpost(models.Model):
     pub_date = models.DateTimeField('Date published',auto_now_add = True)
     def __str__(self):
         return self.title
+    def snippet(self):
+        return self.body[0:50]
 
 class comunity(models.Model):
     users = models.ManyToManyField(User)

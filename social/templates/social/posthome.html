@@ -1,13 +1,19 @@
 {% extends "basegeneric.html" %}
 {% block content %}
-  <p><h1>Post home</h1></p>
+  <h2 class="title">Posts</h2>
+  <div class="posts">
   {% if latest_posts_list %}
-    <ul>
     {% for posts in latest_posts_list %}
-        <li><a href="/social/posts/{{ posts.id }}/">{{ posts.title }}</a></li>
+        <div class="post">
+          <h3> <a href="/social/posts/{{ posts.id }}/">{{ posts.title }}</a> </h3>
+          <p>{{posts.snippet}}</p>
+          <p>{{posts.pub_date}}</p>
+          <p>by {{posts.user.username}}</p>
+        </div>
     {% endfor %}
-    </ul>
+  </div>
 {% else %}
-    <p>No polls are available.</p>
+    <p>No posts are available.</p>
 {% endif %}
+
 {% endblock %}
