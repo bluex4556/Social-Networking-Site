@@ -13,11 +13,22 @@ h1, h2, h3, h4, h5{
     margin: 0;
 }
 
-a{
-    color: purple;
+a, a:visited, a:hover{
+    color: white;
     text-decoration: none;
 }
 
-a:visited, a:hover {
-  color: red;
+nav {
+  justify-self: start;
+}
+
+nav li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+nav button{
+  background: none;
+  color: white;
+  border: 0px
 }

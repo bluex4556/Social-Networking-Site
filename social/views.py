@@ -85,3 +85,17 @@ def post_create(request):
     else:
         form = forms.CreatePost()
     return render(request, 'social/post_create.html', {'form':form})
+
+@login_required(login_url = '/accounts/login/')
+def blogpost_create(request,blog_id):
+    if request.method == 'POST':
+        form = forms.CreateBlogpost(request.POST)
+        if form.is_valid():
+            instance = form.save(commit = False)
+            instance.blog = get_object_or_404(blog,id=blog_id)
+            instance.save()
+            #save article to db
+            return redirect('social:posthome')
+    else:
+        form = forms.CreateBlogpost()
+    return render(request, 'social/blogpost_create.html', {'form':form, 'blog_id':blog_id})
