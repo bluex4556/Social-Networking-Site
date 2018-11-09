@@ -6,7 +6,10 @@ app_name = 'social'
 urlpatterns= [
     path('',views.index,name='index'),
     path('create/post', views.post_create, name= 'createpost'),
+    path('create/<int:posts_id>/comment', views.comment_create, name= 'comment_create'),
     path(r'create/<int:blog_id>/blogpost/', views.blogpost_create, name= 'blogpost_create'),
+    path('create/blog/',views.blog_create, name= 'blog_create'),
+    path('create/<int:blog_id>/tags/', views.blogtags_create, name= 'blogtags_create'),
     path(r'profile/', views.UserProfileView,name='profileview'),
     path(r'connect/<str:operation>/<int:pk>/', views.change_friends, name='change_friends'), #operation= add or remove
     path('posts/', views.posthome,name= 'posthome'),

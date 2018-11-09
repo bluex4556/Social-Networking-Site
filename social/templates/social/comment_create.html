@@ -1,0 +1,12 @@
+{% extends 'basegeneric.html' %}
+
+{% block content %}
+  <div class="create-comment">
+    <h2>Create comment</h2>
+    <form class="site-form" action="{% url 'social:comment_create' posts_id=posts_id %}" method="post">
+      {% csrf_token %}
+      {{form}}
+      <input type="submit" value="create">
+    </form>
+  </div>
+{% endblock %}

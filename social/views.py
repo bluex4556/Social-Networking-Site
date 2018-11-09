@@ -47,7 +47,7 @@ def detail(request, posts_id):
 def bloghome(request, blog_id):
     blogs= blog.objects.get(pk=blog_id)
     taglist= blogtags.objects.filter( blog = blogs ).values('tags')
-    latest_posts_list = blogpost.objects.order_by('-pub_date')[:5]
+    latest_posts_list = blogpost.objects.filter(blog = blogs).order_by('-pub_date')[:5]
     context= {'latest_posts_list':latest_posts_list,
               'blogs': blogs,
               'taglist':taglist,}
@@ -99,3 +99,45 @@ def blogpost_create(request,blog_id):
     else:
         form = forms.CreateBlogpost()
     return render(request, 'social/blogpost_create.html', {'form':form, 'blog_id':blog_id})
+
+@login_required(login_url = '/accounts/login/')
+def blog_create(request):
+    if request.method == 'POST':
+        form = forms.CreateBlog(request.POST)
+        if form.is_valid():
+            instance = form.save(commit = False)
+            instance.user = request.user
+            instance.save()
+            return redirect('social:bloghome', blog_id= blog_id)
+    else:
+        form = forms.CreateBlog()
+    return render(request, 'social/blog_create.html', {'form':form})
+
+@login_required(login_url = '/accounts/login/')
+def blogtags_create(request,blog_id):
+    if request.method == 'POST':
+        form = forms.CreateBlogtags(request.POST)
+        if form.is_valid():
+            instance = form.save(commit = False)
+            instance.blog = get_object_or_404(blog, id=blog_id)
+            instance.save()
+            #save article to db
+            return redirect('social:bloghome', blog_id= blog_id)
+    else:
+        form = forms.CreateBlogtags()
+    return render(request, 'social/blogtags_create.html', {'form':form, 'blog_id':blog_id})
+
+@login_required(login_url = '/accounts/login/')
+def comment_create(request,posts_id):
+    if request.method == 'POST':
+        form = forms.CreateComment(request.POST)
+        if form.is_valid():
+            instance = form.save(commit = False)
+            instance.posts = get_object_or_404(posts, id=posts_id)
+            instance.user = request.user
+            instance.save()
+            #save article to db
+            return redirect('social:detail',posts_id= posts_id)
+    else:
+        form = forms.CreateComment()
+    return render(request, 'social/comment_create.html', {'form':form, 'posts_id':posts_id})
