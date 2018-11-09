@@ -1,0 +1,15 @@
+{% extends 'basegeneric.html' %}
+{% block content %}
+<p> in dev</p>
+<div class="related">
+{% if blogs %}
+  {% for blog in blogs %}
+      <div class="related-blogs">
+        <h3> <a href="/social/blog/{{ blog.id }}/">{{ blog.blogname }}</a> </h3>
+      </div>
+  {% endfor %}
+</div>
+{% else %}
+  <p>No blogs are available.</p>
+{% endif %}
+{% endblock %}

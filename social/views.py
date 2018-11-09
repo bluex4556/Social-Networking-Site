@@ -30,6 +30,22 @@ def UserProfileView(request):
                 }
     return render(request, 'social/profile.html', context)
 
+def OtherUserProfileView(request, user_id):
+    temp = get_object_or_404(User,pk=user_id)
+    profiles= profile.objects.get(user= temp)
+    intrestlist = userintrests.objects.filter(Profile = profiles).values('intrest')
+    try:
+        friends = Friend.objects.get(current_user= temp)
+        friendslist = friends.users.all()
+    except Friend.DoesNotExist:
+        friendslist = False
+    context = {
+            'profile': profiles,
+            'intrestlist': intrestlist,
+            'friendslist':friendslist,
+                }
+    return render(request, 'social/profile.html', context)
+
 def posthome(request):
     latest_posts_list = posts.objects.order_by('-pub_date')[:5]
     context= {'latest_posts_list':latest_posts_list}
@@ -141,3 +157,20 @@ def comment_create(request,posts_id):
     else:
         form = forms.CreateComment()
     return render(request, 'social/comment_create.html', {'form':form, 'posts_id':posts_id})
+
+@login_required(login_url = '/accounts/login/')
+def related(request):
+    temp = request.user
+    user_intrests = userintrests.objects.filter(Profile = temp.profile).values_list('intrest')
+    user_intrest=  []
+    for intrest in user_intrests:
+        user_intrest.append(intrest[0])
+    blogs =[]
+    for intrest in user_intrest:
+        try:
+            tags =  blogtags.objects.get(tags = intrest)
+            blogs.append(get_object_or_404(blog, id= tags.blog.id))
+        except blogtags.DoesNotExist:
+            pass
+    context = {'blogs': blogs}
+    return render(request, 'social/related.html', context)
