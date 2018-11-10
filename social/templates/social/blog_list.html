@@ -1,0 +1,18 @@
+{% extends "basegeneric.html" %}
+{% block content %}
+  <h2 class="title">Blogs</h2>
+  <div class="blogs">
+  {% if object_list %}
+    {% for blog in object_list %}
+        <div class="bloglist">
+          <h3> <a href= "{% url 'social:bloghome' blog_id=blog.id%}">{{ blog.blogname }}</a> </h3>
+          <p>by {{blog.user.username}}</p>
+        </div>
+    {% endfor %}
+
+  {% else %}
+    <p>No posts are available.</p>
+  {% endif %}
+  <a href="{% url 'social:blog_create' %}" class="btn btn-success">Create New Blog</a>
+  </div>
+{% endblock %}

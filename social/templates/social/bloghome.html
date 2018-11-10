@@ -14,6 +14,7 @@
   {%else%}
     <p>no intrests</p>
   {%endif%}
+  <a href="{% url 'social:blogtags_create' blog_id=blogs.id %}" class="btn btn-success">Add tag</a>
   <p>Posts</p>
   {% if latest_posts_list %}
     <ul>
@@ -21,7 +22,8 @@
         <li><a href="/social/blog/posts/{{ blogpost.id }}/">{{ blogpost.title }}</a></li>
     {% endfor %}
     </ul>
-{% else %}
+  {% else %}
     <p>No posts are available.</p>
-{% endif %}
+  {% endif %}
+  <a href="{% url 'social:blogpost_create' blog_id=blogs.id %}" class="btn btn-success">Create New BlogPost</a>
 {% endblock %}

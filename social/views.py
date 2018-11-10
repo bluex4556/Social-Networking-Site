@@ -6,7 +6,7 @@ from .models import profile,posts,blog,blogpost,userintrests,blogtags,Friend,com
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from . import forms
-from django.views.generic.edit import UpdateView
+from django.views.generic import UpdateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
@@ -114,8 +114,7 @@ def blogpost_create(request,blog_id):
             instance = form.save(commit = False)
             instance.blog = get_object_or_404(blog,id=blog_id)
             instance.save()
-            #save article to db
-            return redirect('social:posthome')
+            return redirect('social:bloghome', blog_id = instance.blog.id)
     else:
         form = forms.CreateBlogpost()
     return render(request, 'social/blogpost_create.html', {'form':form, 'blog_id':blog_id})
@@ -128,7 +127,7 @@ def blog_create(request):
             instance = form.save(commit = False)
             instance.user = request.user
             instance.save()
-            return redirect('social:bloghome', blog_id= blog_id)
+            return redirect('social:bloghome', blog_id = instance.id)
     else:
         form = forms.CreateBlog()
     return render(request, 'social/blog_create.html', {'form':form})
@@ -141,8 +140,7 @@ def blogtags_create(request,blog_id):
             instance = form.save(commit = False)
             instance.blog = get_object_or_404(blog, id=blog_id)
             instance.save()
-            #save article to db
-            return redirect('social:bloghome', blog_id= blog_id)
+            return redirect('social:bloghome', blog_id= instance.blog.id)
     else:
         form = forms.CreateBlogtags()
     return render(request, 'social/blogtags_create.html', {'form':form, 'blog_id':blog_id})
@@ -187,3 +185,6 @@ class ProfileUpdateView(LoginRequiredMixin,UpdateView):
     #     return profile.objects.get(user=self.request.user)
     def get_object(self, queryset=None):
         return self.request.user.profile
+
+class BlogListView(ListView):
+    queryset = blog.objects.all()
