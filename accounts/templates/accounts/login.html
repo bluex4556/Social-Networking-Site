@@ -1,14 +1,14 @@
 {% extends "basegeneric.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 <h1>login</h1>
 <form class="site-form" action="{% url 'accounts:login' %}" method="post">
   {% csrf_token %}
-  {{form}}
+  {{form|crispy}}
   <!-- sends the next value from request to login -->
   {% if request.GET.next %}
     <input type="hidden" name="next" value="{{request.GET.next}}">
   {% endif %}
-  <input type="submit" value="login">
+  <input type="submit" class="btn btn-success" value="login">
 </form>
 {% endblock %}

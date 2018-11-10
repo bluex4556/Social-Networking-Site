@@ -1,12 +1,13 @@
 {% extends 'basegeneric.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
   <div class="create-comment">
     <h2>Create comment</h2>
     <form class="site-form" action="{% url 'social:comment_create' posts_id=posts_id %}" method="post">
       {% csrf_token %}
-      {{form}}
-      <input type="submit" value="create">
+      {{form|crispy}}
+      <input type="submit" class="btn btn-success" value="create">
     </form>
   </div>
 {% endblock %}

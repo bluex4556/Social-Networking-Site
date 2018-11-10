@@ -1,12 +1,13 @@
 {% extends 'basegeneric.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
   <div class="create-blogtags">
     <h2>Create blogtags</h2>
     <form class="site-form" action="{% url 'social:blogtags_create' blog_id=blog_id %}" method="post">
       {% csrf_token %}
-      {{form}}
-      <input type="submit" value="create">
+      {{form|crispy}}
+      <input type="submit" class="btn btn-success" value="create">
     </form>
   </div>
 {% endblock %}

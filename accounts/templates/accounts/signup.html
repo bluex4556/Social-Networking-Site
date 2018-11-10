@@ -1,10 +1,10 @@
 {% extends 'basegeneric.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 <h1>Signup</h1>
 <form class="site-form" action="/accounts/signup/" method="post">
   {% csrf_token %}
-  {{form}}
-  <input type="submit" value="Signup">
+  {{form|crispy}}
+  <input type="submit" class="btn btn-success" value="Signup">
 </form>
 {% endblock %}

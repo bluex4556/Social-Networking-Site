@@ -42,19 +42,25 @@ nav button
 {
   background: none;
   color: white;
-  border: 0px
+  border: 0px;
+  padding: 14px 18px;
+
 }
 
-#right-button
+.right-button
 {
   float:right;
-  padding: 13px 5px;
 }
 
 .wrapper button
 {
     display:block;
     cursor: pointer;
+}
+
+nav button:hover
+{
+  background-color:#111;
 }
 
 nav li a {
@@ -112,4 +118,33 @@ nav li a:hover:not(.active)
 .comments
 {
   padding:20px;
+}
+
+.site-form
+{
+  margin: 10px ;
+  margin-top: 60px;
+  border: 1px solid #00dba0;
+  padding:20px;
+}
+
+.site-form input, .site-form text-area
+{
+  display: block;
+  margin: 20px 0 0 0;
+}
+
+.helptext , .helptext ul
+{
+  margin: 0 auto 20px;
+  display: block;
+  font-size: 0.9em;
+  color: #99b6bc
+}
+
+.errorlist
+{
+  padding: 10px;
+  list-style-type:none;
+
 }
