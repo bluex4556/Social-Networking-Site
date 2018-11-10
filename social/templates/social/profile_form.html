@@ -1,0 +1,10 @@
+{% extends 'basegeneric.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form class="site-form" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Save changes</button>
+    <a href="{% url 'social:profileview'%}" class="btn btn-outline-secondary" role="button">Cancel</a>
+</form>
+{% endblock %}

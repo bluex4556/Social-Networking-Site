@@ -12,6 +12,7 @@ urlpatterns= [
     path('create/<int:blog_id>/tags/', views.blogtags_create, name= 'blogtags_create'),
     path(r'profile/me', views.UserProfileView,name='profileview'),
     path(r'profile/<int:user_id>', views.OtherUserProfileView,name='profileview'),
+    path('profile/me/update', views.ProfileUpdateView.as_view(), name='ProfileUpdate'),
     path(r'connect/<str:operation>/<int:pk>/', views.change_friends, name='change_friends'), #operation= add or remove
     path('posts/', views.posthome,name= 'posthome'),
     path('posts/<int:posts_id>/', views.detail, name='detail'),

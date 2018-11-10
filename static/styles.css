@@ -128,12 +128,6 @@ nav li a:hover:not(.active)
   padding:20px;
 }
 
-.site-form input, .site-form text-area
-{
-  display: block;
-  margin: 20px 0 0 0;
-}
-
 .helptext , .helptext ul
 {
   margin: 0 auto 20px;

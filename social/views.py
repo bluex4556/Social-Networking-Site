@@ -6,6 +6,10 @@ from .models import profile,posts,blog,blogpost,userintrests,blogtags,Friend,com
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from . import forms
+from django.views.generic.edit import UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+
 
 # Create your views here.
 
@@ -174,3 +178,12 @@ def related(request):
             pass
     context = {'blogs': blogs}
     return render(request, 'social/related.html', context)
+
+class ProfileUpdateView(LoginRequiredMixin,UpdateView):
+    model = profile
+    fields = ['avatar','dob', 'address','work','education']
+    success_url = reverse_lazy('social:profileview')
+    # def get(self,request):
+    #     return profile.objects.get(user=self.request.user)
+    def get_object(self, queryset=None):
+        return self.request.user.profile
