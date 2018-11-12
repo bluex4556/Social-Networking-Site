@@ -4,6 +4,6 @@
 ### To do
 
 
-create blog, community
-edit profile
+create community
 styles
+add links
