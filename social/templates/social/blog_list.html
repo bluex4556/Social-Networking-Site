@@ -6,13 +6,17 @@
     {% for blog in object_list %}
         <div class="bloglist">
           <h3> <a href= "{% url 'social:bloghome' blog_id=blog.id%}">{{ blog.blogname }}</a> </h3>
-          <p>by {{blog.user.username}}</p>
+          <p>About: {{blog.snippet}}</p>
+          <p class="username" >created by {{blog.user.username}}</p>
+
         </div>
     {% endfor %}
 
   {% else %}
     <p>No posts are available.</p>
   {% endif %}
-  <a href="{% url 'social:blog_create' %}" class="btn btn-success">Create New Blog</a>
+
   </div>
+  <a href="{% url 'social:blog_create' %}" class="btn btn-success" id="create-blog">Create New Blog</a>
+
 {% endblock %}

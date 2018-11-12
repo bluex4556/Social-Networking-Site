@@ -83,7 +83,9 @@ nav li a:hover:not(.active)
   margin-top: 20px;
 }
 
-.post h3{
+.post h3
+{
+  text-align: center;
   margin-bottom: 20px;
 }
 
@@ -102,10 +104,28 @@ nav li a:hover:not(.active)
   padding: 10px;
   border: 2px solid #00dba0;
   position: relative;
-  padding-bottom : 20px;
+  padding-bottom : 50px;
 
 }
 
+#post-date
+{
+    position:absolute;
+    bottom: 4%;
+    left: 2;
+    margin: 0;
+    font-size: 0.7em;
+
+}
+
+#create-post
+{
+  position:fixed;
+  right: 2%;
+  bottom: 5%;
+  padding: 10px;
+
+}
 .post-detail
 {
   padding:20px
@@ -141,4 +161,55 @@ nav li a:hover:not(.active)
   padding: 10px;
   list-style-type:none;
 
+}
+
+.blogs
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap:30px;
+  padding-bottom: 30px;
+
+}
+
+.bloglist
+{
+  margin-left: 15px;
+  padding: 10px;
+  border: 2px solid #00dba0;
+  position: relative;
+  padding-bottom : 20px;
+
+}
+
+.wrapper .username
+{
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  background-color: #00d89e;
+  color: #0f121f;
+  font-size: 0.8em;
+  font-family: sans-serif
+}
+
+.bloglist p
+{
+  font-size:1.2em;
+  padding: 10px ;
+}
+
+.bloglist h3
+{
+  text-align: center;
+}
+
+#create-blog
+{
+  position:fixed;
+  right: 2%;
+  bottom: 5%;
+  padding: 10px;
 }

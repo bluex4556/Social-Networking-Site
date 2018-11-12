@@ -21,6 +21,7 @@
       {%else%}
         <p>no comments</p>
       {%endif%}
+      <a href="{% url 'social:comment_create' posts_id=post.id %}" class="btn btn-success">Add Comment</a>
   </div>
 
 {% endblock %}

@@ -71,6 +71,8 @@ class blog(models.Model):
     about= models.TextField(null=True)
     def __str__(self):
         return self.blogname
+    def snippet(self):
+        return self.about[0:50]
 
 class blogtags(models.Model):
     blog= models.ForeignKey(blog,related_name='blog',on_delete=models.CASCADE)
