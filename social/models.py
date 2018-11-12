@@ -8,7 +8,7 @@ from django.utils import timezone
 class profile(models.Model):
     user= models.OneToOneField(User, on_delete= models.CASCADE)
     dob=  models.DateField('date of birth',blank=True,null=True)
-    avatar= models.ImageField(blank=True,null=True)
+    avatar= models.ImageField(blank=True,null=True, default = 'default.png')
     address = models.CharField(max_length= 50, blank=True,null=True)
     work = models.CharField(max_length= 20, blank=True,null=True)
     education = models.CharField(max_length= 20, blank=True,null=True)

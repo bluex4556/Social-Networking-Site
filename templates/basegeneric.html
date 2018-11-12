@@ -16,6 +16,7 @@
       <ul>
         <li><a href="{% url 'social:posthome' %}">Posts</a></li>
         <li><a href="{% url 'social:BlogListView' %}">Blogs</a></li>
+        <li><a href="{% url 'social:UserListView' %}">Users</a></li>
         {% if user.is_authenticated %}
           <li> <a href="{% url 'social:profileview'%}">Profile</a></li>
           <li> <a href="{% url 'social:related' %}">Related</a></li>

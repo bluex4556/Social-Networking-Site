@@ -1,0 +1,28 @@
+{% extends "basegeneric.html" %}
+{% block content %}
+  <h2 class="title">Users</h2>
+  <div class="Users">
+  {% if object_list %}
+    {% for user_ in object_list %}
+        <div class="user">
+          {% if request.user != user_%}
+            <a href= "{% url 'social:profileview' user_id=user_.id%}">{{ user_.username }}</a>
+            {% if request.user.is_authenticated%}
+              {% if friendslist %}
+                {% if user_ in friendslist %}
+                  <a href="{% url 'social:change_friends' operation='remove' pk=user_.id %}" class='btn btn-warning '>remove friend</a>
+                {% else %}
+                  <a href="{% url 'social:change_friends' operation='add' pk=user_.id %}" class='btn btn-success'>add friend</a>
+                {% endif %}
+              {% else %}
+                <a href="{% url 'social:change_friends' operation='add' pk=user_.id %}" class='btn btn-success'>add friend</a>
+              {% endif %}
+            {% endif %}
+          {% endif %}
+
+        </div>
+    {% endfor %}
+
+  {% endif %}
+  </div>
+{% endblock %}

@@ -11,6 +11,7 @@ urlpatterns= [
     path(r'create/<int:blog_id>/blogpost/', views.blogpost_create, name= 'blogpost_create'),
     path('create/blog/',views.blog_create, name= 'blog_create'),
     path('create/<int:blog_id>/tags/', views.blogtags_create, name= 'blogtags_create'),
+    path('create/userintrests/', views.CreateUserintrestView.as_view(), name = 'CreateUserintrestView'),
 
     path(r'profile/me', views.UserProfileView,name='profileview'),
     path(r'profile/<int:user_id>', views.OtherUserProfileView,name='profileview'),
@@ -26,5 +27,6 @@ urlpatterns= [
     path('comunity/<int:comunity_id>',views.comunityhome, name = 'comunityhome'),
     path('related/', views.related, name= 'related'),
     path('blog/', views.BlogListView.as_view(), name = 'BlogListView'),
+    path('users/', views.UserListView.as_view(),name= 'UserListView'),
 
 ]

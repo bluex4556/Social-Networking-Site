@@ -5,7 +5,7 @@
   <p>date of birth : {{profile.dob}}</p>
   <p> avatar: </p>
   {% if profile.avatar %}
-  <img src="{{profile.avatar.url}}" alt="Profile picture" width="270" height="250"">
+    <img src="{{profile.avatar.url}}" alt="Profile picture" width="270" height="250"">
   {% endif %}
   <p>address : {{profile.address}}</p>
   <p>work : {{profile.work}}</p>
@@ -20,6 +20,8 @@
   {%else%}
     <p>no intrests</p>
   {%endif%}
+  <a href="{% url 'social:CreateUserintrestView' %}" class="btn btn-primary">add intrest</a>
+
   <p> Friends <p>
   {% if friendslist %}
     <ul>
@@ -30,5 +32,5 @@
   {%else%}
     <p>no Friends</p>
   {%endif%}
-
+  <a href="{% url 'social:ProfileUpdate' %}" class="btn btn-info">Update Profile</a>
 {% endblock %}

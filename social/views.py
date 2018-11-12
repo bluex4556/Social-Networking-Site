@@ -6,7 +6,7 @@ from .models import profile,posts,blog,blogpost,userintrests,blogtags,Friend,com
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from . import forms
-from django.views.generic import UpdateView, ListView
+from django.views.generic import UpdateView, ListView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
@@ -83,7 +83,7 @@ def change_friends(request, operation, pk):
         Friend.make_friend(request.user, friend)
     elif operation == 'remove':
         Friend.lose_friend(request.user, friend)
-    return redirect('index')
+    return redirect('social:UserListView')
 
 def comunityhome(request, comunity_id):
     comunity_= comunity.objects.get(pk=comunity_id)
@@ -188,3 +188,32 @@ class ProfileUpdateView(LoginRequiredMixin,UpdateView):
 
 class BlogListView(ListView):
     queryset = blog.objects.all()
+
+class UserListView(ListView):
+    queryset = User.objects.all()
+    template_name = 'social/user_list.html'
+    def get_context_data(self, **kwargs):
+        context =  super(UserListView,self).get_context_data(**kwargs)
+        if( self.request.user.is_authenticated ):
+            try:
+                friend = Friend.objects.get(current_user= self.request.user)
+                friends=  friend.users.all()
+            except Friend.DoesNotExist:
+                friends = False
+        else:
+            friends= False
+        context['friendslist'] = friends
+        return context
+
+class CreateUserintrestView(CreateView):
+    model = userintrests
+    fields = ['intrest']
+    success_url = reverse_lazy('social:profileview')
+
+    def form_valid(self, form):
+        form.instance.Profile = self.request.user.profile
+        form.save()
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return HttpResponse('error')
