@@ -190,7 +190,6 @@ class BlogListView(ListView):
     queryset = blog.objects.all()
 
 class UserListView(ListView):
-    queryset = User.objects.all()
     template_name = 'social/user_list.html'
     def get_context_data(self, **kwargs):
         context =  super(UserListView,self).get_context_data(**kwargs)
@@ -204,6 +203,8 @@ class UserListView(ListView):
             friends= False
         context['friendslist'] = friends
         return context
+    def get_queryset(self):
+        return User.objects.all().exclude(pk= self.request.user.id)
 
 class CreateUserintrestView(CreateView):
     model = userintrests

@@ -1,11 +1,13 @@
 {% extends 'basegeneric.html' %}
 {% block content %}
-<p> in dev</p>
-<div class="related">
+<h2 class="title">Relate Blogs</h2>
+<div class="blogs">
 {% if blogs %}
   {% for blog in blogs %}
-      <div class="related-blogs">
-        <h3> <a href="/social/blog/{{ blog.id }}/">{{ blog.blogname }}</a> </h3>
+      <div class="bloglist">
+        <h3> <a href= "{% url 'social:bloghome' blog_id=blog.id%}">{{ blog.blogname }}</a> </h3>
+        <p>About: {{blog.snippet}}</p>
+        <p class="username" >created by {{blog.user.username}}</p>
       </div>
   {% endfor %}
 </div>

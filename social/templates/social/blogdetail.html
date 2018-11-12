@@ -1,6 +1,9 @@
 {% extends "basegeneric.html" %}
 {% block content %}
-    <h1>{{ posts.title }}</h1>
+  <div class="post-detail">
+  <div class ="post">
+    <h2>{{ posts.title }}</h2>
     <p>{{posts.body}}</p>
     <p>{{posts.pub_date}}</p>
+  </div>
 {% endblock %}
